@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+:root {
+
+  /* ===== NEW THEME ===== */
+
+  --primary:#0d3320;
+  --primary-light:#2d6040;
+
+  --bg:#d6f0c2;
+  --bg-light:#f5f0e8;
+
+  --card-bg:#ffffff;
+
+  --border:rgba(13,51,32,0.14);
+
+  --text:#0d3320;
+  --muted:#4a7a5a;
+
+  --green-dark:#0d3320;
+  --green-accent:#6bb88f;
+
+  --error:#e05252;
+  --success:#4caf50;
+
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d6f0c2 0%,
+      #f5f0e8 100%
+    );
+
+  color:var(--text);
+
+  min-height:100vh;
+}
+
+/* ── Shared Layout ── */
+
+.page-bg{
+  min-height:100vh;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #d6f0c2 0%,
+      #eef8e8 50%,
+      #f5f0e8 100%
+    );
+
+  padding:24px;
+}
+
+/* ── Card ── */
+
+.card{
+  background:var(--card-bg);
+
+  border:1px solid var(--border);
+
+  border-radius:22px;
+
+  padding:40px 36px;
+
+  width:100%;
+  max-width:420px;
+
+  box-shadow:
+    0 10px 28px rgba(0,0,0,0.06);
+}
+
+.card-wide{
+  max-width:560px;
+}
+
+/* ── Logo strip ── */
+
+.logo-strip{
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  margin-bottom:28px;
+
+  padding-bottom:20px;
+
+  border-bottom:1px solid var(--border);
+}
+
+.logo-strip img{
+  height:38px;
+  object-fit:contain;
+  border-radius: 25px;
+}
+
+.logo-strip .brand{
+  font-size:16px;
+  font-weight:700;
+
+  color:var(--primary);
+
+  letter-spacing:0.5px;
+}
+
+/* ── Headings ── */
+
+.page-title{
+  font-size:28px;
+  font-weight:700;
+
+  color:var(--primary);
+
+  margin-bottom:8px;
+}
+
+.page-sub{
+  font-size:14px;
+
+  color:var(--muted);
+
+  margin-bottom:28px;
+
+  line-height:1.7;
+}
+
+/* ── Form fields ── */
+
+.field{
+  margin-bottom:18px;
+}
+
+.field label{
+  display:block;
+
+  font-size:12px;
+  font-weight:700;
+
+  color:var(--primary);
+
+  text-transform:uppercase;
+
+  letter-spacing:0.8px;
+
+  margin-bottom:7px;
+}
+
+.field input{
+  width:100%;
+
+  padding:13px 14px;
+
+  background:#f8faf6;
+
+  border:1px solid rgba(13,51,32,0.12);
+
+  border-radius:12px;
+
+  color:var(--text);
+
+  font-family:'Poppins',sans-serif;
+
+  font-size:14px;
+
+  outline:none;
+
+  transition:0.2s;
+}
+
+.field input:focus{
+  border-color:var(--primary);
+
+  box-shadow:
+    0 0 0 4px rgba(13,51,32,0.06);
+}
+
+.field input::placeholder{
+  color:#8aa291;
+}
+
+/* ── Buttons ── */
+
+.btn{
+  display:inline-block;
+
+  padding:13px 24px;
+
+  border:none;
+
+  border-radius:14px;
+
+  font-family:'Poppins',sans-serif;
+
+  font-size:14px;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:0.2s;
+}
+
+.btn-primary{
+  background:#0d3320;
+
+  color:white;
+
+  width:100%;
+
+  margin-top:8px;
+}
+
+.btn-primary:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 10px 22px rgba(13,51,32,0.18);
+}
+
+.btn-outline{
+  background:transparent;
+
+  border:1px solid var(--primary);
+
+  color:var(--primary);
+}
+
+.btn-outline:hover{
+  background:rgba(13,51,32,0.08);
+}
+
+.btn-sm{
+  padding:8px 16px;
+  font-size:13px;
+}
+
+/* ── Error / success ── */
+
+.msg-error{
+  font-size:13px;
+
+  color:var(--error);
+
+  background:rgba(224,82,82,0.08);
+
+  border-left:3px solid var(--error);
+
+  padding:10px 12px;
+
+  border-radius:8px;
+
+  margin-bottom:14px;
+}
+
+.msg-success{
+  font-size:13px;
+
+  color:var(--success);
+
+  background:rgba(76,175,80,0.08);
+
+  border-left:3px solid var(--success);
+
+  padding:10px 12px;
+
+  border-radius:8px;
+
+  margin-bottom:14px;
+}
+
+/* ── Switch link ── */
+
+.switch-text{
+  font-size:13px;
+
+  color:var(--muted);
+
+  text-align:center;
+
+  margin-top:20px;
+}
+
+.switch-text span{
+  color:var(--primary);
+
+  cursor:pointer;
+
+  font-weight:700;
+}
+
+.switch-text span:hover{
+  opacity:0.8;
+}
+
+/* ── Form grid ── */
+
+.form-grid{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:0 16px;
+}
+
+/* ── Responsive ── */
+
+@media(max-width:480px){
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    padding:28px 20px;
+    border-radius:18px;
+  }
+
+}

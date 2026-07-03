@@ -1,0 +1,265 @@
+.wrapper{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  background:linear-gradient(
+    135deg,
+    #d6f0c2 0%,
+    #f5f0e8 100%
+  );
+}
+
+/* ===== HERO ===== */
+
+.hero{
+  padding:90px 20px 70px;
+  text-align:center;
+  border-bottom:1px solid rgba(13,51,32,0.1);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.heroEyebrow{
+  display:inline-block;
+  padding:6px 18px;
+  border-radius:30px;
+  background:rgba(13,51,32,0.08);
+  border:1px solid rgba(13,51,32,0.12);
+
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#0d3320;
+
+  margin-bottom:20px;
+}
+
+.heroTitle{
+  font-size:clamp(40px,6vw,72px);
+  font-weight:800;
+  color:#0d3320;
+  line-height:1.1;
+  margin-bottom:18px;
+}
+
+.heroSub{
+  max-width:760px;
+  margin:0 auto;
+  font-size:17px;
+  line-height:1.9;
+  color:#4a7a5a;
+}
+
+/* ===== PROGRAMS ===== */
+
+.programs{
+  flex:1;
+  width:100%;
+  max-width:1250px;
+  margin:0 auto;
+  padding:70px 24px;
+  
+}
+
+.sectionHeading{
+  font-size:44px;
+  font-weight:800;
+  color:#0d3320;
+  margin-bottom:10px;
+}
+
+.sectionSub{
+  font-size:16px;
+  color:#4a7a5a;
+  margin-bottom:42px;
+}
+
+/* ===== CARDS ===== */
+
+.programs{
+  flex:1;
+  width:100%;
+  max-width:1100px;
+  margin:0 auto;
+  padding:70px 24px;
+
+  display:flex;
+  flex-direction:column;
+  gap:34px;
+}
+
+.card{
+  width:100%;
+
+  background:#ffffff;
+  border-radius:28px;
+  padding:40px;
+
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+
+  border:1px solid rgba(13,51,32,0.12);
+
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.08);
+
+  transition:0.25s ease;
+
+  position:relative;
+}
+
+.card:hover{
+  transform:translateY(-6px);
+
+  box-shadow:
+    0 20px 40px rgba(0,0,0,0.12);
+}
+/* ===== CARD THEMES ===== */
+
+.nict{
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #eef8e8 100%
+    );
+}
+
+.bsw{
+  background:
+    linear-gradient(
+      135deg,
+      #ffffff 0%,
+      #f8f1df 100%
+    );
+}
+
+/* ===== BADGES ===== */
+
+.badge{
+  width:fit-content;
+
+  padding:7px 16px;
+
+  border-radius:30px;
+
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+
+  background:#dff2d3;
+  color:#0d3320;
+
+  border:1px solid rgba(13,51,32,0.12);
+}
+
+.bswBadge{
+  background:#f7eac5;
+}
+
+/* ===== CONTENT ===== */
+
+.cardTitle{
+  font-size:30px;
+  font-weight:800;
+  line-height:1.25;
+  color:#0d3320;
+}
+
+.cardDesc{
+  font-size:15px;
+  color:#4a7a5a;
+  line-height:1.9;
+}
+
+/* ===== FEATURES ===== */
+
+.features{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  margin-top:4px;
+}
+
+.features li{
+  background:rgba(255,255,255,0.7);
+
+  border:1px solid rgba(13,51,32,0.08);
+
+  padding:14px 16px;
+
+  border-radius:14px;
+
+  font-size:14px;
+  color:#2d6040;
+  font-weight:500;
+}
+
+/* ===== BUTTON ===== */
+
+.cardBtn{
+  margin-top:14px !important;
+  width:fit-content !important;
+
+  padding:15px 28px !important;
+
+  border-radius:50px !important;
+
+  font-size:15px !important;
+  font-weight:700 !important;
+
+  transition:0.2s !important;
+}
+
+.cardBtn:hover{
+  transform:translateY(-2px);
+}
+
+/* ===== FOOTER ===== */
+
+.footer{
+  padding:26px 20px;
+  text-align:center;
+
+  background:#c8e6b0;
+
+  border-top:1px solid rgba(13,51,32,0.1);
+
+  color:#4a7a5a;
+
+  font-size:13px;
+  line-height:1.8;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:900px){
+
+  .programs{
+    padding:50px 20px;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .hero{
+    padding:70px 20px 50px;
+  }
+
+  .heroTitle{
+    font-size:46px;
+  }
+
+  .sectionHeading{
+    font-size:34px;
+  }
+
+  .cardTitle{
+    font-size:24px;
+  }
+
+}

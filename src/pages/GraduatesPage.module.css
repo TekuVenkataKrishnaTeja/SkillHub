@@ -1,0 +1,252 @@
+/* GraduatesPage.module.css */
+
+.wrapper{
+  min-height:100vh;
+  background:#d6f0c2;
+}
+
+/* ===== VIDEO SECTION ===== */
+
+.videoSection{
+  display:flex;
+  justify-content:center;
+  padding:50px 20px 20px;
+}
+
+.videoCard{
+  width:100%;
+  max-width:1100px;
+
+  background:#ffffff;
+
+  border-radius:28px;
+
+  padding:40px;
+
+  box-shadow:
+    0 12px 28px rgba(0,0,0,0.08);
+
+  border:1px solid rgba(13,51,32,0.08);
+}
+
+.pageTitle{
+  font-size:38px;
+  font-weight:800;
+  line-height:1.2;
+  color:#0d3320;
+  margin-bottom:20px;
+}
+
+.pageSub{
+  font-size:16px;
+  line-height:1.9;
+  color:#4a7a5a;
+  margin-bottom:24px;
+}
+
+.videoBox{
+  width:100%;
+  height:520px;
+
+  overflow:hidden;
+
+  border-radius:22px;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.08);
+}
+
+/* ===== SECTION ===== */
+
+.departmentSection,
+.courseSection{
+  display:flex;
+  justify-content:center;
+  padding:20px;
+}
+
+.sectionCard{
+  width:100%;
+  max-width:1100px;
+
+  background:white;
+
+  border-radius:28px;
+
+  padding:34px;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.08);
+}
+
+.sectionTitle{
+  font-size:42px;
+  font-weight:800;
+  color:#0d3320;
+  margin-bottom:30px;
+}
+
+/* ===== DEPARTMENTS ===== */
+
+.departmentGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:22px;
+}
+
+.departmentCard{
+  background:#fafafa;
+
+  border:1px solid #ddd;
+
+  border-radius:22px;
+
+  padding:26px;
+
+  cursor:pointer;
+
+  font-size:22px;
+  font-weight:700;
+  color:#0d3320;
+
+  transition:0.25s ease;
+
+  text-align:center;
+}
+
+.departmentCard:hover{
+  transform:translateY(-4px);
+
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.08);
+}
+
+.selectedDepartment{
+  background:#b6d2b2;
+  border-color:#529448;
+}
+
+/* ===== COURSES ===== */
+
+.courseGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.courseBox{
+  background:#fafafa;
+
+  border:1px solid #ddd;
+
+  border-radius:18px;
+
+  padding:20px;
+
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  transition:0.2s;
+}
+.selectedCourse{
+  background:#b6d2b2;
+  border-color:#529448;
+}
+
+
+.courseBox:hover{
+  transform:translateY(-2px);
+
+  box-shadow:
+    0 6px 14px rgba(0,0,0,0.08);
+}
+
+.icon{
+  width:42px;
+  height:42px;
+
+  border-radius:12px;
+
+  background:#f2ece5;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* ===== APPLY BUTTON ===== */
+
+.applySection{
+  padding:10px 20px 40px;
+}
+
+.applyContainer{
+  display:flex;
+  justify-content:flex-end;
+
+  width:100%;
+  max-width:1100px;
+
+  margin:0 auto;
+}
+
+.applyBtn{
+  background:#b6d2b2;
+  color:#0d3320;
+
+  border:2px solid #529448;
+  padding:18px 50px;
+
+  border-radius:50px;
+
+  font-size:20px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  transition:0.2s;
+}
+
+.applyBtn:hover{
+  transform:translateY(-2px);
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:900px){
+
+  .courseGrid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .departmentGrid{
+    grid-template-columns:1fr;
+  }
+
+  .pageTitle{
+    font-size:30px;
+  }
+
+}
+
+@media(max-width:600px){
+
+  .courseGrid{
+    grid-template-columns:1fr;
+  }
+
+  .sectionTitle{
+    font-size:30px;
+  }
+
+  .videoBox{
+    height:260px;
+  }
+
+  .videoCard,
+  .sectionCard{
+    padding:24px;
+  }
+
+}
