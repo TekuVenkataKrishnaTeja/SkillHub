@@ -7,13 +7,16 @@ function LoginPage({ onLogin, onNavigate }) {
   const [password, setPassword] = useState('');
   const [error, setError]       = useState('');
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!email || !password) {
       setError('Please enter your email and password.');
       return;
     }
     setError('');
-    onLogin(email.split('@')[0]);
+    const result = await onLogin(email, password);
+    if (result && !result.success) {
+      setError(result.error || 'Invalid email or password.');
+    }
   };
 
   return (

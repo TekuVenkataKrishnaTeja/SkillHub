@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar';
 import styles from './NICTPage.module.css';
 
 function NICTPage(props) {
-  const userName = props.userName;
+  const userData = props.userData;
   const onNavigate = props.onNavigate;
 
   const [activeTab, setActiveTab] = useState('school');
@@ -15,84 +15,149 @@ function NICTPage(props) {
   });
 
   useEffect(() => {
-    setStatuses({
-      school: localStorage.getItem('nict_status_school') || 'not_started',
-      college: localStorage.getItem('nict_status_college') || 'not_started',
-      graduate: localStorage.getItem('nict_status_graduate') || 'not_started'
-    });
-  }, []);
+    const fetchStatus = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/tracking/${userData.email}`);
+        const data = await res.json();
+        setStatuses({
+          school: data.nict_status_school || 'not_started',
+          college: data.nict_status_college || 'not_started',
+          graduate: data.nict_status_graduate || 'not_started'
+        });
+      } catch (err) {
+        console.error('Failed to fetch tracking status:', err);
+      }
+    };
+    if (userData?.email) {
+      fetchStatus();
+    }
+  }, [userData]);
 
   useEffect(() => {
     if (statuses.school === 'paid') {
-      const timer = setTimeout(() => {
+      const timer = setTimeout(async () => {
         setStatuses(prev => ({ ...prev, school: 'email_generated' }));
-        localStorage.setItem('nict_status_school', 'email_generated');
+        try {
+          await fetch('http://localhost:5000/api/tracking/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userData.email, program: 'nict_status_school', status: 'email_generated' })
+          });
+        } catch (err) { console.error(err); }
       }, 5000);
       return () => clearTimeout(timer);
     }
     if (statuses.school === 'email_generated') {
-      const timer = setTimeout(() => {
+      const timer = setTimeout(async () => {
         setStatuses(prev => ({ ...prev, school: 'sessions_active' }));
-        localStorage.setItem('nict_status_school', 'sessions_active');
+        try {
+          await fetch('http://localhost:5000/api/tracking/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userData.email, program: 'nict_status_school', status: 'sessions_active' })
+          });
+        } catch (err) { console.error(err); }
       }, 5000);
       return () => clearTimeout(timer);
     }
     if (statuses.school === 'sessions_active') {
-      const timer = setTimeout(() => {
+      const timer = setTimeout(async () => {
         setStatuses(prev => ({ ...prev, school: 'completed' }));
-        localStorage.setItem('nict_status_school', 'completed');
+        try {
+          await fetch('http://localhost:5000/api/tracking/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userData.email, program: 'nict_status_school', status: 'completed' })
+          });
+        } catch (err) { console.error(err); }
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [statuses.school]);
+  }, [statuses.school, userData]);
 
   useEffect(() => {
     if (statuses.college === 'paid') {
-      const timer = setTimeout(() => {
+      const timer = setTimeout(async () => {
         setStatuses(prev => ({ ...prev, college: 'email_generated' }));
-        localStorage.setItem('nict_status_college', 'email_generated');
+        try {
+          await fetch('http://localhost:5000/api/tracking/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userData.email, program: 'nict_status_college', status: 'email_generated' })
+          });
+        } catch (err) { console.error(err); }
       }, 5000);
       return () => clearTimeout(timer);
     }
     if (statuses.college === 'email_generated') {
-      const timer = setTimeout(() => {
+      const timer = setTimeout(async () => {
         setStatuses(prev => ({ ...prev, college: 'sessions_active' }));
-        localStorage.setItem('nict_status_college', 'sessions_active');
+        try {
+          await fetch('http://localhost:5000/api/tracking/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userData.email, program: 'nict_status_college', status: 'sessions_active' })
+          });
+        } catch (err) { console.error(err); }
       }, 5000);
       return () => clearTimeout(timer);
     }
     if (statuses.college === 'sessions_active') {
-      const timer = setTimeout(() => {
+      const timer = setTimeout(async () => {
         setStatuses(prev => ({ ...prev, college: 'completed' }));
-        localStorage.setItem('nict_status_college', 'completed');
+        try {
+          await fetch('http://localhost:5000/api/tracking/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userData.email, program: 'nict_status_college', status: 'completed' })
+          });
+        } catch (err) { console.error(err); }
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [statuses.college]);
+  }, [statuses.college, userData]);
 
   useEffect(() => {
     if (statuses.graduate === 'paid') {
-      const timer = setTimeout(() => {
+      const timer = setTimeout(async () => {
         setStatuses(prev => ({ ...prev, graduate: 'email_generated' }));
-        localStorage.setItem('nict_status_graduate', 'email_generated');
+        try {
+          await fetch('http://localhost:5000/api/tracking/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userData.email, program: 'nict_status_graduate', status: 'email_generated' })
+          });
+        } catch (err) { console.error(err); }
       }, 5000);
       return () => clearTimeout(timer);
     }
     if (statuses.graduate === 'email_generated') {
-      const timer = setTimeout(() => {
+      const timer = setTimeout(async () => {
         setStatuses(prev => ({ ...prev, graduate: 'sessions_active' }));
-        localStorage.setItem('nict_status_graduate', 'sessions_active');
+        try {
+          await fetch('http://localhost:5000/api/tracking/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userData.email, program: 'nict_status_graduate', status: 'sessions_active' })
+          });
+        } catch (err) { console.error(err); }
       }, 5000);
       return () => clearTimeout(timer);
     }
     if (statuses.graduate === 'sessions_active') {
-      const timer = setTimeout(() => {
+      const timer = setTimeout(async () => {
         setStatuses(prev => ({ ...prev, graduate: 'completed' }));
-        localStorage.setItem('nict_status_graduate', 'completed');
+        try {
+          await fetch('http://localhost:5000/api/tracking/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userData.email, program: 'nict_status_graduate', status: 'completed' })
+          });
+        } catch (err) { console.error(err); }
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [statuses.graduate]);
+  }, [statuses.graduate, userData]);
 
 
   const steps = [
@@ -143,7 +208,7 @@ function NICTPage(props) {
   return (
     <div className={styles.wrapper}>
       <Navbar
-        userName={userName}
+        userName={userData.name}
         onNavigate={onNavigate}
         logo={logo}
       />

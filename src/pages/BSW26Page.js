@@ -4,29 +4,57 @@ import logo from '../assets/logo.png';
 
 import styles from './BSW26Page.module.css';
 
-function BSW26Page({ userName, onNavigate }) {
+function BSW26Page({ userData, onNavigate }) {
   const [status, setStatus] = useState('not_started');
 
   useEffect(() => {
-    const savedStatus = localStorage.getItem('bsw26_status') || 'not_started';
-    setStatus(savedStatus);
+    const fetchStatus = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/tracking/${userData.email}`);
+        const data = await res.json();
+        setStatus(data.bsw26_status || 'not_started');
+      } catch (err) {
+        console.error('Failed to fetch tracking status:', err);
+      }
+    };
+    if (userData?.email) {
+      fetchStatus();
+    }
+  }, [userData]);
 
-    if (savedStatus === 'paid') {
-      const timer = setTimeout(() => {
+  useEffect(() => {
+    if (status === 'paid') {
+      const timer = setTimeout(async () => {
         setStatus('under_review');
-        localStorage.setItem('bsw26_status', 'under_review');
+        try {
+          await fetch('http://localhost:5000/api/tracking/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userData.email, program: 'bsw26_status', status: 'under_review' })
+          });
+        } catch (err) {
+          console.error(err);
+        }
       }, 5000);
       return () => clearTimeout(timer);
     }
 
-    if (savedStatus === 'under_review') {
-      const timer = setTimeout(() => {
+    if (status === 'under_review') {
+      const timer = setTimeout(async () => {
         setStatus('approved');
-        localStorage.setItem('bsw26_status', 'approved');
+        try {
+          await fetch('http://localhost:5000/api/tracking/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userData.email, program: 'bsw26_status', status: 'approved' })
+          });
+        } catch (err) {
+          console.error(err);
+        }
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [status]);
+  }, [status, userData]);
 
 
   // Status mapping to help render timeline stages
@@ -52,7 +80,7 @@ function BSW26Page({ userName, onNavigate }) {
     <div className={styles.page}>
 
       <Navbar
-        userName={userName}
+        userName={userData.name}
         onNavigate={onNavigate}
         logo={logo}
       />
@@ -218,7 +246,7 @@ function BSW26Page({ userName, onNavigate }) {
                   <div className={styles.statusDetailIcon}>🎉</div>
                   <div>
                     <h4>Admission Confirmed!</h4>
-                    <p>Congratulations, {userName || 'Innovator'}! Your seat is secured.</p>
+                    <p>Congratulations, {userData.name || 'Innovator'}! Your seat is secured.</p>
                   </div>
                 </div>
               </div>

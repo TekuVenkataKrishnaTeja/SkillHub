@@ -23,7 +23,7 @@ function BSW26RegistrationPage({
     window.scrollTo(0, 0);
   }, []);
 const [errors, setErrors] = useState({});
-const handleProceed = () => {
+const handleProceed = async () => {
 
   const newErrors = {};
 
@@ -60,7 +60,16 @@ const handleProceed = () => {
     return;
   }
 
-  localStorage.setItem('bsw26_status', 'registered');
+  try {
+    await fetch('http://localhost:5000/api/tracking/update', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: userData.email, program: 'bsw26_status', status: 'registered' })
+    });
+  } catch (err) {
+    console.error('Failed to update tracking status:', err);
+  }
+
   onNavigate('payment', {
     amount: 999
   });

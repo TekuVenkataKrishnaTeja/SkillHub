@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# VASISTA SkillHub - Web Application with MySQL Database
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An interactive, responsive skill training and enrollment dashboard designed for schools, colleges, graduates, and innovators. Features real-time course registration tracking status, payment verification loops, dynamic user profile modification (with Base64 profile photo uploads), and a Node.js Express server backend connected to a MySQL database.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Project Architecture
 
-### `npm start`
+The application is built using a modern full-stack architecture:
+*   **Frontend**: React (Single Page Application) with custom styled Vanilla CSS.
+*   **Backend**: Node.js & Express server exposing REST APIs for authentication, profiles, and category tracking.
+*   **Database**: MySQL database (`skillhub_db`) to store user records and category status logs.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Prerequisites
 
-### `npm test`
+Before starting, ensure you have the following installed on your machine:
+*   [Node.js](https://nodejs.org/) (v16 or higher)
+*   [MySQL Server](https://dev.mysql.com/downloads/installer/) (v8 or higher)
+*   [npm](https://www.npmjs.com/) (bundled with Node.js)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Database Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1.  Start your MySQL server.
+2.  Log in to your MySQL terminal or GUI manager (such as MySQL Workbench or phpMyAdmin).
+3.  Import/Execute the database schema file located in the project root:
+    ```bash
+    mysql -u root -p < schema.sql
+    ```
+    This script will:
+    *   Create a database named `skillhub_db`.
+    *   Create the `users` table to handle login credentials and profile images.
+    *   Create the `tracking_status` table to store real-time tracking progress for each course/workshop category.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Installation & Setup
 
-### `npm run eject`
+1.  **Clone / Download the project repository** to your local machine.
+2.  Open your terminal inside the project directory (`c:\Users\tekuv\skillhub`).
+3.  **Install dependencies** for both React and Express server layers:
+    ```bash
+    npm install
+    ```
+4.  **Create a `.env` file** in the root of the project to customize database parameters (optional, default fallbacks will be used if not specified):
+    ```env
+    PORT=5000
+    DB_HOST=localhost
+    DB_USER=root
+    DB_PASSWORD=your_mysql_password
+    DB_NAME=skillhub_db
+    DB_PORT=3306
+    ```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Running the Application
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+To run the full stack, you must start the backend database API server and the React frontend development server simultaneously.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 1. Start the Backend Express Server
+In your terminal, launch the server file:
+```bash
+node server.js
+```
+You should see:
+```text
+Connected to MySQL database skillhub_db.
+Server is running on port 5000
+```
 
-## Learn More
+### 2. Start the Frontend React Application
+Open a second terminal window in the same project root folder and start the React dev server:
+```bash
+npm start
+```
+The application will automatically load in your browser at `http://localhost:3000`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Core Features & Workflows
 
-### Code Splitting
+### 1. User Registration & Sign In
+*   **Register Page**: Enter name, phone, email, and password. This submits a record to the `users` table and creates an initialized row in the `tracking_status` table.
+*   **Login Page**: Authenticate securely using MySQL verification.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 2. Profile Customization
+*   Go to the **Profile** section to inspect and modify your name, phone number, and password.
+*   **Profile Image Upload**: Select a profile photo. The frontend reads the image file using `FileReader`, converts it into a Base64-encoded Data URL, and saves it directly to the database. Click **Save Changes** to commit.
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 3. Application Tracking Status Timelines
+*   **BSW26 Page**: Tracks your 4-step Business Startup Workshop journey.
+*   **NICT Page**: Tracks your 5-stage student/graduate technology curriculum progress.
+*   **Automated Stage Progression**: When registration is submitted and payment is completed, the background timers dynamically transition statuses every 5 seconds (verifying transaction -> credential email dispatch -> active class batched -> certificate issued).

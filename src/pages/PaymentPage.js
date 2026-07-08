@@ -13,36 +13,54 @@ function PaymentPage({
 
   const [paymentMethod, setPaymentMethod] = useState('card');
 
-  const handlePay = () => {
-    if (amount === 100) {
-      localStorage.setItem('nict_status_school', 'paid');
-      alert('Payment of ₹100 for School Program successful!');
-      onNavigate('Nictpage');
-    } else if (amount === 499) {
-      localStorage.setItem('nict_status_college', 'paid');
-      alert('Payment of ₹499 for College Program successful!');
-      onNavigate('Nictpage');
-    } else if (amount === 999) {
-      // Check which registration was active
-      const isBSW = localStorage.getItem('bsw26_status') === 'registered';
-      const isGrad = localStorage.getItem('nict_status_graduate') === 'registered';
-      
-      if (isBSW) {
-        localStorage.setItem('bsw26_status', 'paid');
-        alert('Payment of ₹999 for BSW26 Cohort 2026 successful!');
-        onNavigate('bsw26');
-      } else if (isGrad) {
-        localStorage.setItem('nict_status_graduate', 'paid');
-        alert('Payment of ₹999 for Graduate Program successful!');
+  const handlePay = async () => {
+    try {
+      const res = await fetch(`http://localhost:5000/api/tracking/${userData.email}`);
+      const trackingData = await res.json();
+
+      if (amount === 100) {
+        await fetch('http://localhost:5000/api/tracking/update', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: userData.email, program: 'nict_status_school', status: 'paid' })
+        });
+        alert('Payment of ₹100 for School Program successful!');
         onNavigate('Nictpage');
+      } else if (amount === 499) {
+        await fetch('http://localhost:5000/api/tracking/update', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: userData.email, program: 'nict_status_college', status: 'paid' })
+        });
+        alert('Payment of ₹499 for College Program successful!');
+        onNavigate('Nictpage');
+      } else if (amount === 999) {
+        const isBSW = trackingData.bsw26_status === 'registered';
+        
+        if (isBSW) {
+          await fetch('http://localhost:5000/api/tracking/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userData.email, program: 'bsw26_status', status: 'paid' })
+          });
+          alert('Payment of ₹999 for BSW26 Cohort 2026 successful!');
+          onNavigate('bsw26');
+        } else {
+          await fetch('http://localhost:5000/api/tracking/update', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: userData.email, program: 'nict_status_graduate', status: 'paid' })
+          });
+          alert('Payment of ₹999 for Graduate Program successful!');
+          onNavigate('Nictpage');
+        }
       } else {
-        localStorage.setItem('nict_status_graduate', 'paid');
-        alert('Payment of ₹999 successful!');
-        onNavigate('Nictpage');
+        alert(`Payment of ₹${amount} successful!`);
+        onNavigate('home');
       }
-    } else {
-      alert(`Payment of ₹${amount} successful!`);
-      onNavigate('home');
+    } catch (err) {
+      console.error(err);
+      alert('Payment processing failed. Please try again.');
     }
   };
 

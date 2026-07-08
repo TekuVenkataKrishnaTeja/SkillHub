@@ -27,7 +27,7 @@ function RegisterPage({
 
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
 
     const {
       name,
@@ -57,11 +57,17 @@ function RegisterPage({
 
     setError('');
 
-    onRegister({
+    const result = await onRegister({
       name,
       email,
-      phone
+      phone,
+      password
     });
+
+    if (result && !result.success) {
+      setError(result.error || 'Registration failed.');
+      return;
+    }
 
     setSuccess(true);
 

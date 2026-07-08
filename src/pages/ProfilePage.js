@@ -11,6 +11,7 @@ function ProfilePage({
 
   const [showPassword, setShowPassword] =
     useState(false);
+  const [saveStatus, setSaveStatus] = useState('');
 
   const updateField = (field) => (e) => {
 
@@ -27,14 +28,37 @@ function ProfilePage({
 
     if (!file) return;
 
-    const imageUrl =
-      URL.createObjectURL(file);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setUserData({
+        ...userData,
+        image: reader.result
+      });
+    };
+    reader.readAsDataURL(file);
 
-    setUserData({
-      ...userData,
-      image:imageUrl
-    });
+  };
 
+  const handleSave = async () => {
+    try {
+      const res = await fetch('http://localhost:5000/api/profile/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: userData.email,
+          name: userData.name,
+          phone: userData.phone,
+          image: userData.image
+        })
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed to save profile');
+      setSaveStatus('✓ Profile changes saved to database!');
+      setTimeout(() => setSaveStatus(''), 3000);
+    } catch (err) {
+      console.error(err);
+      setSaveStatus(`Error: ${err.message}`);
+    }
   };
 
   return (
@@ -230,6 +254,41 @@ function ProfilePage({
 
           </div>
 
+        </div>
+
+        {saveStatus && (
+          <p
+            style={{
+              color: saveStatus.startsWith('Error') ? '#d84315' : '#2e7d32',
+              marginTop: '24px',
+              fontWeight: '700',
+              textAlign: 'center'
+            }}
+          >
+            {saveStatus}
+          </p>
+        )}
+
+        <div style={{ marginTop: '30px', display: 'flex', justifyContent: 'center' }}>
+          <button
+            onClick={handleSave}
+            style={{
+              background: '#025336',
+              color: 'white',
+              border: 'none',
+              padding: '12px 30px',
+              borderRadius: '25px',
+              fontSize: '16px',
+              fontWeight: '700',
+              cursor: 'pointer',
+              boxShadow: '0 4px 10px rgba(2, 83, 54, 0.15)',
+              transition: 'all 0.2s ease'
+            }}
+            onMouseOver={e => e.target.style.transform = 'translateY(-1px)'}
+            onMouseOut={e => e.target.style.transform = 'translateY(0)'}
+          >
+            Save Changes
+          </button>
         </div>
 
       </div>

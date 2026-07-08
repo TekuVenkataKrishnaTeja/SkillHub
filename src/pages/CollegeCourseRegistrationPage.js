@@ -202,8 +202,16 @@ function CollegeCourseRegistrationPage({
             <div className={styles.applyContainer}>
 
               <button className={styles.applyBtn}
-                onClick={() => {
-                  localStorage.setItem('nict_status_college', 'registered');
+                onClick={async () => {
+                  try {
+                    await fetch('http://localhost:5000/api/tracking/update', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ email: userData.email, program: 'nict_status_college', status: 'registered' })
+                    });
+                  } catch (err) {
+                    console.error(err);
+                  }
                   onNavigate('payment', {
                     amount: 499
                   });

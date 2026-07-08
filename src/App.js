@@ -65,36 +65,48 @@ function App() {
 
   const navigate = useNavigate();
 
-  const clearTrackingStates = () => {
-    localStorage.removeItem('bsw26_status');
-    localStorage.removeItem('nict_status_school');
-    localStorage.removeItem('nict_status_college');
-    localStorage.removeItem('nict_status_graduate');
+  const handleLogin = async (email, password) => {
+    try {
+      const res = await fetch('http://localhost:5000/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Login failed');
+      }
+      setUserData({
+        name: data.user.name,
+        email: data.user.email,
+        phone: data.user.phone,
+        password: password, // keep password in memory for edit profile input
+        image: data.user.image || ''
+      });
+      navigate('/home');
+      return { success: true };
+    } catch (err) {
+      console.error(err);
+      return { success: false, error: err.message };
+    }
   };
 
-  const handleLogin = (name) => {
-    clearTrackingStates();
-
-    setUserData((prev) => ({
-      ...prev,
-      name:name
-    }));
-
-    navigate('/home');
-
-  };
-
-  const handleRegister = (data) => {
-    clearTrackingStates();
-
-    setUserData({
-      name:data.name,
-      email:data.email,
-      phone:data.phone,
-      password:data.password,
-      image:''
-    });
-
+  const handleRegister = async (data) => {
+    try {
+      const res = await fetch('http://localhost:5000/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const resData = await res.json();
+      if (!res.ok) {
+        throw new Error(resData.error || 'Registration failed');
+      }
+      return { success: true };
+    } catch (err) {
+      console.error(err);
+      return { success: false, error: err.message };
+    }
   };
 
   const handleNavigate = (
@@ -103,8 +115,6 @@ function App() {
   ) => {
 
     if (target === 'logout') {
-      clearTrackingStates();
-
       setUserData({
         name:'',
         email:'',
@@ -209,7 +219,7 @@ function App() {
         path="/Nictpage"
         element={
           <NICTPage
-            userName={userData.name}
+            userData={userData}
             onNavigate={handleNavigate}
           />
         }
@@ -299,7 +309,7 @@ function App() {
         path="/bsw26"
         element={
           <BSW26Page
-            userName={userData.name}
+            userData={userData}
             onNavigate={handleNavigate}
           />
         }
