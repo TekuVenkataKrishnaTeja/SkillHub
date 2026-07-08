@@ -97,20 +97,28 @@ The application will automatically load in your browser at `http://localhost:300
 
 ## Login Page
 <img width="1917" height="872" alt="image" src="https://github.com/user-attachments/assets/08c75b5b-a6d2-478c-9301-0707f1127259" />
-## sign in page
+
+## Sign in Page
 <img width="1917" height="843" alt="image" src="https://github.com/user-attachments/assets/eb35c3aa-1a91-429b-8354-fe9d0fd6ada2" />
+
 ## home 
 <img width="1890" height="851" alt="image" src="https://github.com/user-attachments/assets/48c8afe1-2d51-4d61-8359-a9c02e395bcc" />
+
 ## NICT page
 <img width="1896" height="861" alt="image" src="https://github.com/user-attachments/assets/a64a4024-2415-487e-ba39-1b82a0854bc4" />
+
 ## Live Application tracking
 <img width="1887" height="871" alt="image" src="https://github.com/user-attachments/assets/416a5d84-4746-4687-abb9-85ca8777eb6a" />
+
 ## application form
 <img width="1885" height="850" alt="image" src="https://github.com/user-attachments/assets/bf1c98ad-e586-4817-ad23-a3d2160665a2" />
+
 ## payment page
 <img width="1917" height="868" alt="image" src="https://github.com/user-attachments/assets/830c6b1a-8265-4ab0-95a4-2d90d992362b" />
+
 ## profile page
 <img width="1917" height="872" alt="image" src="https://github.com/user-attachments/assets/73bca254-91c7-41fd-a49b-4fe4aed688df" />
+
 ## logout page
 <img width="1917" height="867" alt="image" src="https://github.com/user-attachments/assets/ee54feee-7172-45ef-92b4-437821193f16" />
 
