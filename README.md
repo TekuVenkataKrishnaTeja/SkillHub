@@ -2,8 +2,6 @@
 
 An interactive, responsive skill training and enrollment dashboard designed for schools, colleges, graduates, and innovators. Features real-time course registration tracking status, payment verification loops, dynamic user profile modification (with Base64 profile photo uploads), and a Node.js Express server backend connected to a MySQL database.
 
----
-
 ## Project Architecture
 
 The application is built using a modern full-stack architecture:
@@ -96,3 +94,26 @@ The application will automatically load in your browser at `http://localhost:300
 *   **NICT Page**: Tracks your 5-stage student/graduate technology curriculum progress.
 *   **Automated Stage Progression**: When registration is submitted and payment is completed, the background timers dynamically transition statuses every 5 seconds (verifying transaction -> credential email dispatch -> active class batched -> certificate issued).
 #
+
+## Login Page
+<img width="1917" height="872" alt="image" src="https://github.com/user-attachments/assets/08c75b5b-a6d2-478c-9301-0707f1127259" />
+## sign in page
+<img width="1917" height="843" alt="image" src="https://github.com/user-attachments/assets/eb35c3aa-1a91-429b-8354-fe9d0fd6ada2" />
+## home 
+<img width="1890" height="851" alt="image" src="https://github.com/user-attachments/assets/48c8afe1-2d51-4d61-8359-a9c02e395bcc" />
+## NICT page
+<img width="1896" height="861" alt="image" src="https://github.com/user-attachments/assets/a64a4024-2415-487e-ba39-1b82a0854bc4" />
+## Live Application tracking
+<img width="1887" height="871" alt="image" src="https://github.com/user-attachments/assets/416a5d84-4746-4687-abb9-85ca8777eb6a" />
+## application form
+<img width="1885" height="850" alt="image" src="https://github.com/user-attachments/assets/bf1c98ad-e586-4817-ad23-a3d2160665a2" />
+## payment page
+<img width="1917" height="868" alt="image" src="https://github.com/user-attachments/assets/830c6b1a-8265-4ab0-95a4-2d90d992362b" />
+## profile page
+<img width="1917" height="872" alt="image" src="https://github.com/user-attachments/assets/73bca254-91c7-41fd-a49b-4fe4aed688df" />
+## logout page
+<img width="1917" height="867" alt="image" src="https://github.com/user-attachments/assets/ee54feee-7172-45ef-92b4-437821193f16" />
+
+
+
+
